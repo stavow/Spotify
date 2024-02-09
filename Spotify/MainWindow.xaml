@@ -1,0 +1,35 @@
+﻿<Window x:Class="Spotify.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spotify"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        
+        Title="MainWindow" Height="600" Width="800">
+    <Border Background="Black" CornerRadius="10" BorderThickness="1" BorderBrush="#FF393A3B">
+
+
+        <StackPanel>
+            <Border x:Name="Navigation" Background="{x:Static local:Constants+Colors.GridBackground}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8, 40, 0, 0" MinWidth="280" MinHeight="112" Width="280" Height="110" CornerRadius="10" BorderThickness="1">
+                <Grid Margin="24, 11, 24, 11">
+                    <local:NavButton Height="40" VerticalAlignment="Top" Content="Home" PathData="{x:Static local:Constants+Icons.Home}" ActivePathData="{x:Static local:Constants+Icons.HomeActive}" Checked="NavButton_Checked"/>
+                    <local:NavButton Height="40" VerticalAlignment="Bottom" Content="Search" PathData="{x:Static local:Constants+Icons.Magnifier}" ActivePathData="{x:Static local:Constants+Icons.MagnifierActive}"/>
+                </Grid>
+            </Border>
+
+            <Border x:Name="Playlists" Background="{x:Static local:Constants+Colors.GridBackground}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8, 7, 0, 0" MinWidth="280" MinHeight="350" Width="280" Height="350" CornerRadius="10" BorderThickness="1">
+                <Grid Margin="24, 12, 0, 0">
+                    <StackPanel >
+                        <local:SpotifyButton Height="40" VerticalAlignment="Top" Content="Your Library" PathData="{x:Static local:Constants+Icons.Library}" ActivePathData="{x:Static local:Constants+Icons.LibraryActive}"/>
+                    
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

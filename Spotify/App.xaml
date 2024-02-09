@@ -1,0 +1,212 @@
+﻿<Application x:Class="Spotify.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Spotify"
+             xmlns:extensions="clr-namespace:Spotify"
+             
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style TargetType="{x:Type local:NavButton}">
+            <Setter Property="FontFamily" Value="/Fonts/Gotham-Bold.otf #Gotham"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFB5B4B5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:NavButton}">
+                        
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+
+                            <Grid>
+                                <Path x:Name="PathIcon" Width="20" Height="20" Stretch="Fill" Fill="#FFB5B4B5" HorizontalAlignment="Left" Data="{TemplateBinding PathData}"/>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0" />
+                                
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                           
+                            <Trigger Property="local:NavButton.IsChecked"  Value="True">
+                                <Trigger.EnterActions>
+
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardBegin" />
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardEnd" />
+
+                                </Trigger.EnterActions>
+                                <Trigger.Setters>
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter TargetName="PathIcon" Property="Fill" Value="White" />
+                                    <Setter TargetName="PathIcon" Property="Data" Value="{Binding ActivePathData, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </Trigger.Setters>
+                            </Trigger>
+
+                            <EventTrigger RoutedEvent="local:NavButton.Click">
+                                <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardBegin" />
+                                <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardEnd" />
+                            </EventTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="local:NavButton.IsMouseOver" Value="True"/>
+                                    <Condition Property="local:NavButton.IsPressed" Value="False"/>
+                                    <Condition Property="local:NavButton.IsChecked" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardBegin" />
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardEnd" />
+
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardBegin" />
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardEnd" />
+
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="local:NavButton.IsMouseOver" Value="True"/>
+                                    <Condition Property="local:NavButton.IsPressed" Value="False"/>
+                                    <Condition Property="local:NavButton.IsChecked" Value="False"/>
+
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Cursor" Value="Hand" />
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Name="MouseOverStoryBoardBegin">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Fill.Color" Storyboard.TargetName="PathIcon" To="White" />
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Foreground.Color" To="White"/>
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Name="MouseOverStoryBoardEnd" >
+                                        <Storyboard FillBehavior="Stop">
+                                            <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Fill.Color" Storyboard.TargetName="PathIcon" To="#FFB5B4B5"/>
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Foreground.Color" To="#FFB5B4B5" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                    
+
+                        </ControlTemplate.Triggers>
+                      
+                    </ControlTemplate>
+                    
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type local:SpotifyButton}">
+            <Setter Property="FontFamily" Value="/Fonts/Gotham-Bold.otf #Gotham"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFB5B4B5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:SpotifyButton}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Path x:Name="PathIcon" Width="20" Height="20" Stretch="Fill" Fill="#FFB5B4B5" HorizontalAlignment="Left" Data="{TemplateBinding PathData}"/>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0" />
+
+                            </Grid>
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Fill.Color" Storyboard.TargetName="PathIcon" To="White" />
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Foreground.Color" To="White" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Fill.Color" Storyboard.TargetName="PathIcon" To="#FFB5B4B5" />
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Foreground.Color" To="#FFB5B4B5" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="PathIcon" Property="Data" Value="{Binding ActivePathData, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="PathIcon" Property="Data" Value="{Binding PathData, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type local:FilterButton}">
+            <Setter Property="FontFamily" Value="/Fonts/Gotham-Bold.otf #Gotham"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFB5B4B5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:FilterButton}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Path x:Name="PathIcon" Width="20" Height="20" Stretch="Fill" Fill="#FFB5B4B5" HorizontalAlignment="Left" Data="{TemplateBinding PathData}"/>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0" />
+
+                            </Grid>
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Fill.Color" Storyboard.TargetName="PathIcon" To="White" />
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Foreground.Color" To="White" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Fill.Color" Storyboard.TargetName="PathIcon" To="#FFB5B4B5" />
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Foreground.Color" To="#FFB5B4B5" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="PathIcon" Property="Data" Value="{Binding ActivePathData, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="PathIcon" Property="Data" Value="{Binding PathData, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>
