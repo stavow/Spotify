@@ -22,11 +22,11 @@
             </Border>
 
             <Border x:Name="Playlists" Background="{x:Static local:Constants+Colors.GridBackground}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8, 7, 0, 0" MinWidth="280" MinHeight="350" Width="280" Height="350" CornerRadius="10" BorderThickness="1">
-                <Grid Margin="24, 12, 0, 0">
-                    <StackPanel >
+                <Grid Margin="24, 8, 18, 0">
+                    <Grid>
                         <local:SpotifyButton Height="40" VerticalAlignment="Top" Content="Your Library" PathData="{x:Static local:Constants+Icons.Library}" ActivePathData="{x:Static local:Constants+Icons.LibraryActive}"/>
-                    
-                    </StackPanel>
+                        <local:CircularButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="32" Width="32" Margin="0 4" PathData="{x:Static local:Constants+Icons.Plus}" ActivePathData="{x:Static local:Constants+Icons.Plus}"/>
+                    </Grid>
 
                 </Grid>
             </Border>
