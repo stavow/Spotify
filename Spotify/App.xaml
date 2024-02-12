@@ -243,5 +243,99 @@
             </Setter>
         </Style>
         
+        <Style x:Key="EllipseFilterButton" TargetType="{x:Type Button}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="/Fonts/Gotham.otf #Gotham"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}" >
+                        <Grid>
+                            <Border x:Name="border" CornerRadius="15" BorderBrush="#FF232323" BorderThickness="1" Background="#FF232323">
+
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                                </ContentPresenter>
+                            </Border>
+                            
+                        </Grid>
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.3"  Storyboard.TargetProperty="Background.Color" Storyboard.TargetName="border" To="#FF2A2A2A" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Background.Color" Storyboard.TargetName="border" To="#FF232323" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <!---->
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardBegin" />
+                                <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardEnd" />
+                            </EventTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Button.IsMouseOver" Value="True"/>
+                                    <Condition Property="Button.IsPressed" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardBegin" />
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardEnd" />
+
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardBegin" />
+                                    <RemoveStoryboard BeginStoryboardName="MouseOverStoryBoardEnd" />
+
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Button.IsMouseOver" Value="True"/>
+                                    <Condition Property="Button.IsPressed" Value="True"/>
+
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Cursor" Value="Hand" />
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Name="MouseOverStoryBoardBegin">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.1"  Storyboard.TargetProperty="Background.Color" Storyboard.TargetName="border" To="#1a1a1a" />
+                                            <ColorAnimation Duration="0:0:0.1"  Storyboard.TargetProperty="BorderBrush.Color" Storyboard.TargetName="border" To="#1a1a1a" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Name="MouseOverStoryBoardEnd" >
+                                        <Storyboard FillBehavior="HoldEnd">
+                                            <ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" Storyboard.TargetName="border" To="#FF232323" />
+                                            <ColorAnimation Duration="0:0:0.1"  Storyboard.TargetProperty="BorderBrush.Color" Storyboard.TargetName="border" To="#FF232323" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                    
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
