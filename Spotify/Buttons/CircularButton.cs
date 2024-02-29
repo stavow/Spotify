@@ -13,6 +13,7 @@ namespace Spotify
 	{
 		public static readonly DependencyProperty PathDataProperty = DependencyProperty.Register(nameof(PathData), typeof(Geometry), typeof(CircularButton), null);
 		public static readonly DependencyProperty ActivePathDataProperty = DependencyProperty.Register(nameof(ActivePathData), typeof(Geometry), typeof(CircularButton), null);
+		public static DependencyProperty IsSearchButtonProperty = DependencyProperty.RegisterAttached("IsSearchButton", typeof(bool), typeof(CircularButton), new PropertyMetadata(default(bool)));
 
 		public Geometry PathData
 		{
@@ -24,6 +25,16 @@ namespace Spotify
 		{
 			get { return (Geometry)GetValue(ActivePathDataProperty); }
 			set { SetValue(ActivePathDataProperty, value); }
+		}
+
+		public static void SetIsSearchButton(UIElement element, bool value)
+		{
+			element.SetValue(IsSearchButtonProperty, value);
+		}
+
+		public static bool GetIsSearchButton(UIElement element)
+		{
+			return (bool)element.GetValue(IsSearchButtonProperty);
 		}
 	}
 }

@@ -23,16 +23,21 @@
 
             <Border x:Name="Playlists" Background="{x:Static local:Constants+Colors.GridBackground}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8, 7, 0, 0" MinWidth="280" MinHeight="350" Width="280" Height="350" CornerRadius="10" BorderThickness="1">
                 <Grid Margin="24, 8, 18, 0">
-                    <StackPanel>
+                    <StackPanel>    
                         <Grid>
                             <local:SpotifyButton Height="40" VerticalAlignment="Top" Content="Your Library" PathData="{x:Static local:Constants+Icons.Library}" ActivePathData="{x:Static local:Constants+Icons.LibraryActive}"/>
-                            <local:CircularButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="32" Width="32" Margin="0 4" PathData="{x:Static local:Constants+Icons.Plus}" ActivePathData="{x:Static local:Constants+Icons.Plus}"/>
+                            <local:CircularButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="32" Width="32" Margin="0 4" PathData="{x:Static local:Constants+Icons.Plus}" ActivePathData="{x:Static local:Constants+Icons.Plus}" IsSearchButton="False"/>
                         </Grid>
                         <Grid>
                             <StackPanel Orientation="Horizontal" Margin="-8 16">
                                 <Button Style="{DynamicResource EllipseFilterButton}" Width="75" Height="32" Content="Playlists" HorizontalAlignment="Left" Background="#FF232323"/>
                                 <Button Style="{DynamicResource EllipseFilterButton}" Margin="8 0" Width="65" Height="32" Content="Artists" HorizontalAlignment="Left" Background="#FF232323"/>
                                 <Button Style="{DynamicResource EllipseFilterButton}" Width="72" Height="32" Content="Albums" HorizontalAlignment="Right" Background="#FF232323"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Height="40" Margin="-10 0">
+                                <local:CircularButton HorizontalAlignment="Right" VerticalAlignment="Top" Height="32" Width="32" Margin="0 4" PathData="{x:Static local:Constants+Icons.Magnifier}" ActivePathData="{x:Static local:Constants+Icons.Magnifier}" IsSearchButton="True"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
